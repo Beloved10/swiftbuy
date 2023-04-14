@@ -5,16 +5,20 @@
 <section class="container mt-5">
   <h3 class="text-center mb-4">Featured Products</h3>
   <div class="row">
-    {% for product in object_list %}
+    {% for product in products %}
     <div class="col-md-3">
       <div class="card">
+        <a href="{% url 'product' product.slug %}" style="text-decoration:none; color:inherit;">
         <img
           src="{{product.image.url}}"
           alt="Product 1"
           class="card-img-top"
         />
+      </a>
         <div class="card-body">
+          <a href="{% url 'product' product.slug %}" style="text-decoration:none; color:inherit;">
           <h5 class="card-title"><strong>{{product.title}}</strong></h5>
+        </a>
           <p class="card-text">
             <span class="text-muted">${{product.price}}</span>
             {% if product.discount_price %}

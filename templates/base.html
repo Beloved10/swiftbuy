@@ -15,6 +15,35 @@
     <!-- Custom CSS -->
     <style>
       /* Add your custom styles here */
+      .hero-section {
+        background-image: url("/static/images/hero_image.jpg");
+        background-size: cover;
+        background-position: center center;
+        height: calc(50vh - 56px); /* Update the height to your desired value */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* margin-top: 56px; */
+      }
+
+      .hero-section .container {
+        text-align: center;
+      }
+
+      .hero-section h1.display-4 {
+        font-size: 3rem; /* Update the font size to your desired value */
+        font-weight: bold; /* Add font weight to make it bolder */
+      }
+
+      .hero-section p.lead {
+        font-size: 1.5rem; /* Update the font size to your desired value */
+      }
+
+      .hero-section .btn-primary {
+        font-size: 1.2rem; /* Update the font size to your desired value */
+        font-weight: bold; /* Add font weight to make it bolder */
+        padding: 12px 24px; /* Update padding to your desired value */
+      }
     </style>
 
     <!-- Page title -->
@@ -24,7 +53,7 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand ml-3" href="#">SwiftBuy</a>
+      <a class="navbar-brand ml-3" href="{% url 'home' %}"> SwiftBuy </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -38,26 +67,33 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Account</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cart</a>
+          </li>
         </ul>
+        <div class="form-inline my-2 my-lg-0 mr-3">
+          <!-- Add margin to the right -->
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="jumbotron text-center">
+    <section class="hero-section">
       <div class="container">
         <h1 class="display-4">Welcome to SwiftBuy</h1>
         <p class="lead">Shop the latest products with ease</p>
