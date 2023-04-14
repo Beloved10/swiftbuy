@@ -3,15 +3,18 @@ from django.contrib.auth.models import User
 
 
 CATEGORY_CHOICES = (
-    ('SH', 'Shirt'),
+    ('SH', 'Shirts'),
     ('TR', 'Trousers'),
-    ('FW', 'Footwear')
+    ('FW', 'Footwears'),
+    ('OT', 'Others'),
+    ('WT', 'Watches'),
+    ('GT', 'Gadgets')
 )
 
 LABEL_CHOICES = (
-    ('S', 'secondary'),
-    ('P', 'primary'),
-    ('D', 'danger')
+    ('secondary', 'Top'),
+    ('primary', 'Trending'),
+    ('danger', 'New')
 )
 
 class Item(models.Model):
@@ -20,8 +23,9 @@ class Item(models.Model):
     discount_price = models.IntegerField(blank=True, null=True)
     slug = models.SlugField()
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    label = models.CharField(choices=LABEL_CHOICES, max_length=2)
+    label = models.CharField(choices=LABEL_CHOICES, max_length=15)
     description = models.TextField()
+    image = models.ImageField(default='default.jpg', upload_to='static/images')
     
     def __str__(self):
         return self.title
