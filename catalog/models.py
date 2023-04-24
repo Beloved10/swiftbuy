@@ -22,7 +22,7 @@ class Item(models.Model):
     price = models.IntegerField()
     discount_price = models.IntegerField(blank=True, null=True)
     slug = models.SlugField()
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=15)
     label = models.CharField(choices=LABEL_CHOICES, max_length=15)
     description = models.TextField()
     image = models.ImageField(default='default.jpg', upload_to='static/images')
@@ -37,8 +37,9 @@ class OrderItem(models.Model):
     ordered = models.BooleanField(default=False)
     quantity = models.IntegerField(default=1)
     
+    
     def __str__(self):
-        return f"{self.quantity} of {self.item.title}"
+        return f"{self.quantity} of {self.item.title} by {self.user.username}"
 
 
 class Order(models.Model):

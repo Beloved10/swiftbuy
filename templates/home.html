@@ -8,35 +8,52 @@
     {% for product in products %}
     <div class="col-md-3">
       <div class="card">
-        <a href="{% url 'product' product.slug %}" style="text-decoration:none; color:inherit;">
-        <img
-          src="{{product.image.url}}"
-          alt="Product 1"
-          class="card-img-top"
-        />
-      </a>
-        <div class="card-body">
-          <a href="{% url 'product' product.slug %}" style="text-decoration:none; color:inherit;">
-          <h5 class="card-title"><strong>{{product.title}}</strong></h5>
+        <a
+          href="{% url 'product' product.slug %}"
+          style="text-decoration: none; color: inherit"
+        >
+          <img
+            src="{{product.image.url}}"
+            alt="Product 1"
+            class="card-img-top"
+            style="max-height: 100%; object-fit: cover"
+          />
+          <!-- Updated image size to reduce height and maintain aspect ratio -->
         </a>
+        <div class="card-body">
+          <a
+            href="{% url 'product' product.slug %}"
+            style="text-decoration: none; color: inherit"
+          >
+            <h5 class="card-title"><strong>{{product.title}}</strong></h5>
+          </a>
           <p class="card-text">
-            <span class="text-muted" style="text-decoration: line-through;">${{product.price}}</span>
-
+            <span class="text-muted" style="text-decoration: line-through"
+              >${{product.price}}</span
+            >
             {% if product.discount_price %}
             <span class="text-danger ms-2">${{product.discount_price}}</span>
             {% endif %}
-            <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-{{product.label}} ms-2">{{product.get_label_display}}</span></h5>
-                </div>
-                <div class="d-flex justify-content-start align-items-end h-100">
-                    <h5><span class="badge bg-warning ms-2">{{product.get_category_display}}</span></h5>
-                  </div>
-              </div>
-              
           </p>
-          <a href="{% url 'add-to-cart' product.slug %}" class="btn btn-primary">Add to Cart</a>
-         
+          <div class="mask">
+            <div class="d-flex justify-content-start align-items-end h-100">
+              <h5>
+                <span class="badge bg-{{product.label}} ms-2"
+                  >{{product.get_label_display}}</span
+                >
+              </h5>
+            </div>
+            <div class="d-flex justify-content-start align-items-end h-100">
+              <h5>
+                <span class="badge bg-warning ms-2"
+                  >{{product.get_category_display}}</span
+                >
+              </h5>
+            </div>
+          </div>
+          <a href="{% url 'add-to-cart' product.slug %}" class="btn btn-primary"
+            >Add to Cart</a
+          >
         </div>
       </div>
     </div>

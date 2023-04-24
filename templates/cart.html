@@ -1,0 +1,59 @@
+<!-- Cart Page -->
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tags %}
+{% block content %}
+<section class="container mt-5">
+  <h2>Cart</h2>
+  <form method="get" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>Product(s)</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Action</th>
+          <th>Select</th> <!-- Add a new column for checkboxes -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+        <tr>
+          <td>
+            <img
+              src="{{item.item.image.url}}"
+              alt="{{item.item.title}}"
+              class="img-fluid rounded"
+              style="max-height: 100px"
+            />
+            {{item.item.title}}
+          </td>
+          <td>${{item.item.price}}</td>
+          <td>{{item.quantity}}</td>
+          <td>${{ item.item.price|multiply:item.quantity }}</td>
+          <td>
+            <a
+              href="{% url 'remove-from-cart' item.item.slug %}"
+              class="btn btn-sm btn-danger"
+            >
+              Remove from cart
+            </a>
+          </td>
+          <td>
+            <input type="checkbox" name="items" value="{{ item.item.slug }}"> <!-- Add checkbox for each item with value as item's slug -->
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-end align-items-center mt-3">
+      <h5>Total: ${{ cart_total }}</h5>
+      <button type="submit" class="btn btn-primary ms-3" {% if cart_items|length == 0 %}disabled{% endif %}>
+        Checkout
+      </button>
+    </div>
+  </form>
+</section>
+{% endblock %}
